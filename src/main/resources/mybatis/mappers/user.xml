@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="user">
+	
+	<insert id="insert" parameterType="com.javaex.vo.PersonVo">
+		<![CDATA[
+			insert into person
+			values (null, #{id}, #{password}, #{name}, #{gender})
+		]]>
+	</insert>
+	
+	<!-- 로그인(no,name 공간에 넣어준다 // 번호표) -->
+	
+	<select id="selectOne" parameterType="com.javaex.vo.PersonVo" resultType="com.javaex.vo.PersonVo">
+		<![CDATA[
+			select   no
+					,name 
+			from person
+			where id = #{id}
+			and password = #{password}
+		
+		]]>
+	
+	</select>
+	
+	<!-- 한사람 정보 가져오기 -->
+	
+	<select id="getPersonOne" parameterType="int" resultType="com.javaex.vo.PersonVo">
+		<![CDATA[
+		
+			select   no   
+					,id
+					,password
+        			,name
+        			,gender
+			from person
+			where no = #{no}
+		
+		]]>
+	</select>
+	
+	<update id="updatePerson" parameterType="com.javaex.vo.PersonVo">
+		<![CDATA[
+			update person set
+							password = #{password}
+   							,name =	#{name}
+   							,gender = #{gender}
+					where no = #{no}
+		]]>
+		
+	</update>
+	
+	<!-- 중복체크 -->
+	
+	<select id="check" parameterType="String" resultType="int">
+		<![CDATA[
+			select	count(*)
+			from person
+			where id = #{id}
+			
+		]]>
+	
+	</select>
+	
+	
+	
+
+</mapper>
