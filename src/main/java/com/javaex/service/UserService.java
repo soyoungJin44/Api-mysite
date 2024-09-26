@@ -55,16 +55,16 @@ public class UserService {
 	
 	//수정기능
 	
-	public PersonVo exeupdatePerson(PersonVo personVo) {
+	public int exeupdatePerson(PersonVo personVo) {
 		
 		System.out.println("service updateperson이용");
 		
-		PersonVo npersonVo = userDao.update(personVo);
+		int count = userDao.update(personVo);
 		
 //		PersonVo npersonVo = userDao.getPersonOne(personVo.getNo());
 		
 		
-		return npersonVo;
+		return count;
 	}
 	
 	//중복체크

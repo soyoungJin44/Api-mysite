@@ -1,7 +1,9 @@
 package com.javaex.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +12,7 @@ import com.javaex.util.JsonResult;
 import com.javaex.util.JwtUtil;
 import com.javaex.vo.PersonVo;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
@@ -67,6 +70,48 @@ public class UserController {
 			return JsonResult.fail("중복됨");
 		}
 		
+	}
+	
+	//selectOne
+	@GetMapping(value="/api/persons/me")
+	public JsonResult personOneModify(HttpServletRequest request) {
+		System.out.println("modifyForm j w");
+
+		//요청헤더에서 토큰을 꺼낸후 유효성 체크한 후 정상이면 no값 // -값이면 잘못된 값
+		int no = JwtUtil.getNoFromHeader(request);
+		System.out.println(no);
+		
+		if(no != -1) {
+			PersonVo personVo = userService.getPersonOne(no);
+			return JsonResult.success(personVo);
+		}else {
+			
+			return JsonResult.fail("실패");
+		}
+		
+	}
+	
+	//modify
+	@PutMapping(value="/api/persons/me")
+	public JsonResult modify(HttpServletRequest request, @RequestBody PersonVo personVo) {
+		System.out.println("modify j w");
+		
+		//요청헤더에서 토큰을 꺼낸후 유효성 체크한 후 정상이면 no값 // -값이면 잘못된 값
+		int no = JwtUtil.getNoFromHeader(request);
+		personVo.setNo(no);
+		
+		int count = userService.exeupdatePerson(personVo);
+		
+		personVo.setPassword(null);
+		personVo.setGender(null);
+		
+		if(count != 0) {
+			return JsonResult.success(personVo);
+		}else {
+			return JsonResult.fail("실패");
+		}
+				
+				
 	}
 	
 

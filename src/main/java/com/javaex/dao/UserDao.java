@@ -62,15 +62,15 @@ public class UserDao {
 		
 		
 		//수정 (update)
-		public PersonVo update(PersonVo personVo) {
+		public int update(PersonVo personVo) {
 			System.out.println("Dao 업데이트용");
 			
 			int count = sqlSession.update("user.updatePerson", personVo);
 			
 			if(count == 1) {
-				return personVo;
+				return count;
 			}else {
-				return null;
+				return 0;
 			}
 			
 			
