@@ -51,7 +51,8 @@
 		    <version>4.4.0</version>
 		</dependency>
 	    	<!--/ java-jwt-->
-		
+	    	
+	    	
 		<!-- devTool -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
