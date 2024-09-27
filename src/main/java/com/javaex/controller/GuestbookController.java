@@ -33,7 +33,7 @@ public class GuestbookController {
 	//delete
 	@DeleteMapping(value="/api/guest/persons/{no}")
 	public JsonResult deleteOne(@PathVariable (value="no") int no, @RequestBody GuestbookVo guestbookVo) {
-		System.out.println("reaccccccccccccccccccccccccccccccct del j w");
+//		System.out.println("reaccccccccccccccccccccccccccccccct del j w");
 		
 		guestbookVo.setNo(no);
 
@@ -48,8 +48,8 @@ public class GuestbookController {
 	
 	@PostMapping(value="/api/guest/persons")
 	public JsonResult insert(@RequestBody GuestbookVo guestbookVo) {
-		System.out.println("insert j w");
-		System.out.println(guestbookVo);
+//		System.out.println("insert j w");
+//		System.out.println(guestbookVo);
 		
 		int count = guestbookService.exeAdd(guestbookVo);
 		

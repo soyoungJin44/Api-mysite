@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<select id="selectAll" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[
+			
+			select   b.no
+					,b.title
+        			,b.content
+        			,b.hit
+        			,b.reg_date
+        			,p.name
+        			,b.user_no
+			from board b, person p
+			where b.user_no = p.no
+		]]>
+	</select>
+	
+	
+	<delete id="delete" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+		
+			delete from board
+			where no = #{no}
+			and user_no = #{user_no}
+		
+		]]>
+	
+	</delete>
+
+
+	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.BoardVo">
+		
+		<![CDATA[
+			select	 p.name
+					,b.no
+					,b.user_no
+					,b.hit
+        			,b.reg_date
+        			,b.title
+        			,b.content
+			from board b, person p
+			where b.user_no = p.no
+			and b.no = #{param.no}
+		]]>
+	</select>
+	
+	<update id="updateOne" parameterType="com.javaex.vo.BoardVo">
+		
+		<![CDATA[
+			
+			update board
+				set title = #{title},
+    			content = #{content}
+			where no = #{no}
+		
+		]]>
+	
+	</update>
+	
+	<insert id="insert" parameterType="com.javaex.vo.BoardVo">
+	
+		<![CDATA[
+		
+			insert into board 
+			values(null, #{title}, #{content}, 0 , now(), #{user_no})
+		
+		]]>
+	
+	</insert>
+
+</mapper>
