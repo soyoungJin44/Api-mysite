@@ -49,7 +49,7 @@ jobs: # 작업을 정의
           key: ${{ secrets.SSH_PRIVATE_KEY }}			 #web.pem 비번 (깃허브에 세팅된값)
           script: |
             sudo mkdir -p /home/ec2-user/upload			 
-            sudo docker pull clz2024sun/mysite:latest
+            sudo docker pull jjinso/mysite:latest
             sudo docker stop mysite || true
             sudo docker rm mysite || true
             sudo docker run -d \
