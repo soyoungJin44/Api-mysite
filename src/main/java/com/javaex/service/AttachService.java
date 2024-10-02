@@ -34,6 +34,7 @@ public class AttachService {
 		//contains 사용하면 대소문자 상관없이, 포함하고 있으면 가능함  << 파일 저장 폴더 >>
 		if(osName.contains("linux")) {
 			System.out.println("리눅스");
+//			saveDir = "/home/ec2-user/upload";
 			saveDir = "/app/upload";
 		}else {
 			System.out.println("윈도우");
@@ -44,7 +45,7 @@ public class AttachService {
 		
 		// 1번 : 사진에 기본정보로 우리가 관리할 정보를 뽑아내야된다 =>>db에 뽑아낸값 저장ㅇㅇ
 		//저장 폴더 변수로 만들어서 빼놔주기
-		saveDir = "C:\\javaStudy\\upload";
+//		saveDir = "C:\\javaStudy\\upload";
 		
 		//<할 일>
 			//1-1 오리지날 파일명
@@ -81,7 +82,8 @@ public class AttachService {
 		
 		// dao로 전달 ㄱ (과제)
 		
-		int count = attachDao.upload(attachVo2);
+		//int count = attachDao.upload(attachVo2);
+		int count = 1;
 		if(count >= 1) {
 		
 			// 2번 :  사진을 서버에 복사해야된다(db에 직접적으로 전달 ㄴㄴ c드라이브에 저장한 주소값만 보낸다)
